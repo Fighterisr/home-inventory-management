@@ -21,18 +21,18 @@ function App() {
     };
 
     return (
-        
-            <Fragment>
-            <Container>  
-            {!stateAuth.isLoggedIn && showLogin && <Login/>}
-            {!stateAuth.isLoggedIn && !showLogin && <Register/>}
-                     <Grid container justifyContent="center">  
-                        {!stateAuth.isLoggedIn && <Link onClick={switchAuthModeHandler} variant="body2">{buttonText}</Link>}    
-                     </Grid>
-            {stateAuth.isLoggedIn && <Menu/>}
-                    </Container>
-                </Fragment>
-           
+
+        <Fragment>
+            <Container>
+                {!stateAuth.isLoggedIn && showLogin && <Login/>}
+                {!stateAuth.isLoggedIn && !showLogin && <Register/>}
+                <Grid container justifyContent="center">
+                    {!stateAuth.isLoggedIn && <Link onClick={switchAuthModeHandler} variant="body2">{buttonText}</Link>}
+                </Grid>
+                {stateAuth.isLoggedIn && <Menu/>}
+            </Container>
+        </Fragment>
+
     );
 }
 
