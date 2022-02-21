@@ -1,4 +1,4 @@
-import {useRef, Fragment} from "react";
+import {useRef} from "react";
 import {app} from '../firebase'
 import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
 
@@ -23,6 +23,7 @@ const Register = props => {
     const passwordInputRef = useRef();
 
 
+
     const submitHandler = event => {
         event.preventDefault();
 
@@ -36,6 +37,7 @@ const Register = props => {
                 const user = userCredential.user;
             });
     }
+
 
     return (
         <ThemeProvider theme={theme}>
