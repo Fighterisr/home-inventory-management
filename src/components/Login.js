@@ -24,16 +24,15 @@ const theme = createTheme();
 const Login = props => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
-
     const dispatch = useDispatch();
 
     const submitHandler = event => {
         event.preventDefault();
-
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
 
-
+        // TODO: check for form validation
+        props.setIsLoading(true);
 
         const auth = getAuth();
         signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
@@ -43,6 +42,7 @@ const Login = props => {
                     token: user.accessToken
                 }
                 dispatch(authActions.login(userObj))
+                props.setIsLoading(false);
             });
     }
 
