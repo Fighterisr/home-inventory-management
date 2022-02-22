@@ -1,6 +1,6 @@
 import {useRef} from "react";
-import {app} from '../firebase'
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+import {auth} from "./../firebase";
+import {createUserWithEmailAndPassword} from 'firebase/auth'
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -30,7 +30,6 @@ const Register = props => {
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
 
-        const auth = getAuth();
         createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
             .then((userCredential) => {
                 // Signed in

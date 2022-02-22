@@ -1,7 +1,7 @@
 import {useRef} from "react";
 import {useDispatch} from "react-redux";
-import {app} from '../firebase'
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import {auth} from "./../firebase";
+import {signInWithEmailAndPassword} from 'firebase/auth'
 import {authActions} from "../store/auth-slice";
 
 
@@ -34,7 +34,6 @@ const Login = props => {
         // TODO: check for form validation
         props.setIsLoading(true);
 
-        const auth = getAuth();
         signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
             .then((userCredential) => {
                 const user = userCredential.user;
