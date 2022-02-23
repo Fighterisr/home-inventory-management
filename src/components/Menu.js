@@ -1,8 +1,10 @@
 import {useDispatch} from "react-redux";
 import {authActions} from "../store/auth-slice";
+import UserPortrait from "./UserPortrait";
+import {Fragment} from "react";
 
 
-const Menu = (props) => {
+const Menu = props => {
     const dispatch = useDispatch();
     const logoutHandler = () => {
         dispatch(authActions.logout());
@@ -10,7 +12,10 @@ const Menu = (props) => {
 
 
     return (
-        <button onClick={logoutHandler}>Log out</button>
+        <Fragment>
+            <UserPortrait/>
+            <button onClick={logoutHandler}>Log out</button>
+        </Fragment>
     )
 }
 

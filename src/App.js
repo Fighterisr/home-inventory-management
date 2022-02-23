@@ -10,6 +10,7 @@ import Link from '@mui/material/Link';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import {CircularProgress} from "@mui/material";
+import Home from "./components/Home";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                 {isLoading && <CircularProgress/>}
             </Grid>
             {stateAuth.isLoggedIn && <Menu/>}
+            {stateAuth.isLoggedIn && <Home/>}
         </Container>
     );
 }

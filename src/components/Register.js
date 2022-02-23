@@ -1,5 +1,5 @@
 import {useRef} from "react";
-import {auth} from "./../firebase";
+import {auth} from "../firebase";
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 
 import Avatar from '@mui/material/Avatar';
