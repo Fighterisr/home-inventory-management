@@ -1,6 +1,6 @@
 import {useRef} from "react";
 import {useDispatch} from "react-redux";
-import {auth} from "./../firebase";
+import {auth} from "../firebase";
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import {authActions} from "../store/auth-slice";
 
@@ -25,6 +25,7 @@ const Login = props => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const dispatch = useDispatch();
+
 
     const submitHandler = event => {
         event.preventDefault();
