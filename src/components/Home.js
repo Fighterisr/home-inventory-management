@@ -2,7 +2,7 @@ import {Fragment} from "react";
 
 
 const Home = props => {
-    return (
+    return(
         <Fragment></Fragment>
     )
 }
