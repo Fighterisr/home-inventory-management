@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import './App.css';
 import Register from "./components/Register";
 import Login from "./components/Login";
-import Menu from "./components/Menu";
+import MenuBar from "./components/MenuBar";
 
 
 import Link from '@mui/material/Link';
@@ -31,8 +31,9 @@ function App() {
             <Grid container justifyContent="center">
                 {!stateAuth.isLoggedIn && <Link onClick={switchAuthModeHandler} variant="body2">{buttonText}</Link>}
                 {isLoading && <CircularProgress/>}
+                {stateAuth.isLoggedIn && <MenuBar/>}
             </Grid>
-            {stateAuth.isLoggedIn && <Menu/>}
+
             {stateAuth.isLoggedIn && <Home/>}
         </Container>
     );
