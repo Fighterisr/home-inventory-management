@@ -33,7 +33,6 @@ function App() {
                 {isLoading && <CircularProgress/>}
                 {stateAuth.isLoggedIn && <MenuBar/>}
             </Grid>
-
             {stateAuth.isLoggedIn && <Home/>}
         </Container>
     );
