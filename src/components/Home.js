@@ -27,7 +27,7 @@ const Home = props => {
     return (
         <Fragment>
             <NewItem inventoryItems={inventoryItems} setInventoryItems={setInventoryItems}/>
-            <InventoryList inventoryItems={inventoryItems}/>
+            <InventoryList inventoryItems={inventoryItems} setInventoryItems={setInventoryItems}/>
         </Fragment>
     )
 }

@@ -1,4 +1,5 @@
 import {Button, Container, Grid, ListItem, ListItemText} from "@mui/material";
+import DeleteItem from "./DeleteItem";
 
 
 const InventoryItem = props => {
@@ -13,8 +14,9 @@ const InventoryItem = props => {
                 <ListItemText>{"Location: " + props.location}</ListItemText>
             </Container>
             <Grid >
-                <Button variant="contained">Edit</Button>
-                <Button sx={{bgcolor: 'red'}} variant="contained">Delete</Button>
+                <Button variant="contained">Edit Item</Button>
+                <DeleteItem index={props.index} inventoryItems={props.inventoryItems}
+                            setInventoryItems={props.setInventoryItems}/>
             </Grid>
         </ListItem>
     )
