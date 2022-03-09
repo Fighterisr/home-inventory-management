@@ -1,7 +1,8 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, TextField} from "@mui/material";
 import {useRef, useState} from "react";
 import {auth, db} from "../firebase";
 import {ref, set} from "firebase/database";
+import Grid from "@mui/material/Grid";
 
 
 const EditItem = (props) => {
@@ -45,14 +46,25 @@ const EditItem = (props) => {
 
     return (
         <>
-            <Button variant="contained" onClick={handleClickOpen}>Edit Item</Button>
+            <Button size = "small" variant="outlined" onClick={handleClickOpen}>Edit</Button>
             <Dialog open={open}>
-                <DialogTitle>Edit Item</DialogTitle>
+                <DialogTitle >Edit Item</DialogTitle>
+                <Divider/>
                 <DialogContent>
-                    <TextField label={"Name"} inputRef={nameInputRef} defaultValue={props.name}/>
-                    <TextField label={"Description"} inputRef={descriptionInputRef} defaultValue={props.description}/>
-                    <TextField label={"Amount"} inputRef={amountInputRef} defaultValue={props.amount}/>
-                    <TextField label={"Location"} inputRef={locationInputRef} defaultValue={props.location}/>
+                    <Grid container spacing={2}>
+                        <Grid item>
+                             <TextField label={"Name"} inputRef={nameInputRef} defaultValue={props.name}/>
+                        </Grid>
+                        <Grid item>
+                            <TextField label={"Description"} inputRef={descriptionInputRef} defaultValue={props.description}/>
+                        </Grid>
+                        <Grid item>
+                            <TextField label={"Amount"} inputRef={amountInputRef} defaultValue={props.amount}/>
+                        </Grid>
+                        <Grid item>
+                            <TextField label={"Location"} inputRef={locationInputRef} defaultValue={props.location}/>
+                        </Grid>
+                    </Grid>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => {setOpen(false)}}>Cancel</Button>

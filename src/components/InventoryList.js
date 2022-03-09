@@ -1,5 +1,7 @@
 import {List} from "@mui/material";
 import InventoryItem from "./InventoryItem";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 
 
 const InventoryList = (props) => {
@@ -20,9 +22,9 @@ const InventoryList = (props) => {
 
 
     return (
-        <List sx={{bgcolor: 'lightBlue'}}>
+        <Paper elevation={24} >
             {listItems}
-        </List>
+        </Paper>
     )
 }
 

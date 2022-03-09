@@ -1,4 +1,4 @@
-import {Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle} from "@mui/material";
+import {Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider} from "@mui/material";
 import {useState} from "react";
 import {auth, db} from "../firebase";
 import {ref, set} from "firebase/database";
@@ -32,9 +32,10 @@ const DeleteItem = (props) => {
 
     return (
         <>
-            <Button sx={buttonStyle} variant="contained" onClick={handleClickOpen}>Delete Item</Button>
+            <Button size = "small" color = "error" variant="outlined" onClick={handleClickOpen}>Delete</Button>
             <Dialog open={open}>
                 <DialogTitle>Delete Item</DialogTitle>
+                <Divider/>
                 <DialogContent>
 
                     <Alert severity="error">
@@ -43,7 +44,7 @@ const DeleteItem = (props) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => {setOpen(false)}}>Cancel</Button>
-                    <Button onClick={deleteCurrentItem}>Delete</Button>
+                    <Button color="error" onClick={deleteCurrentItem}>Delete</Button>
                 </DialogActions>
             </Dialog>
         </>

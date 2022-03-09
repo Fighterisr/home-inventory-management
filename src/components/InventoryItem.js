@@ -7,19 +7,19 @@ const InventoryItem = props => {
 
 
     return (
-        <ListItem divider={props.isDividedAtBottom}>
-            <Container>
+            <ListItem divider={props.isDividedAtBottom} >
+                <Container>
                 <ListItemText>{props.name}</ListItemText>
                 <ListItemText>{"Description: " + props.description}</ListItemText>
                 <ListItemText>{"Amount: " + props.amount}</ListItemText>
                 <ListItemText>{"Location: " + props.location}</ListItemText>
-            </Container>
-            <Grid>
-                <EditItem {...props} />
-                <DeleteItem index={props.index} inventoryItems={props.inventoryItems}
+                 </Container>
+                <Grid>
+                    <EditItem {...props} />
+                    <DeleteItem index={props.index} inventoryItems={props.inventoryItems}
                             setInventoryItems={props.setInventoryItems}/>
-            </Grid>
-        </ListItem>
+                </Grid>
+            </ListItem>
     )
 }
 

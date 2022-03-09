@@ -14,6 +14,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PopupState, {bindTrigger, bindMenu} from 'material-ui-popup-state';
 
 
+
 const MenuBar = props => {
     const dispatch = useDispatch();
     const logoutHandler = () => {
@@ -22,7 +23,7 @@ const MenuBar = props => {
 
 
     return (
-        <Fragment>
+
             <PopupState variant="popover" popupId="demo-popup-menu">
                 {(popupState) => (
                     <Paper>
@@ -59,7 +60,8 @@ const MenuBar = props => {
                     </Paper>
                 )}
             </PopupState>
-        </Fragment>
+
+
     )
 }
 

@@ -1,8 +1,9 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Fab, TextField} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Fab, TextField} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import {Fragment, useRef, useState} from "react";
 import {ref, set} from "firebase/database"
 import {db, auth} from "../firebase"
+import Grid from "@mui/material/Grid";
 
 const fabStyle = {
     position: 'absolute',
@@ -58,11 +59,22 @@ const NewItem = (props) => {
             </Fab>
             <Dialog open={open}>
                 <DialogTitle>Add Item</DialogTitle>
+                <Divider/>
                 <DialogContent>
-                    <TextField label={"Name"} inputRef={nameInputRef}/>
-                    <TextField label={"Description"} inputRef={descriptionInputRef}/>
-                    <TextField label={"Amount"} inputRef={amountInputRef}/>
-                    <TextField label={"Location"} inputRef={locationInputRef}/>
+                    <Grid container spacing={2}>
+                        <Grid item>
+                            <TextField label={"Name"} inputRef={nameInputRef}/>
+                        </Grid>
+                        <Grid item>
+                            <TextField label={"Description"} inputRef={descriptionInputRef}/>
+                        </Grid>
+                        <Grid item>
+                            <TextField label={"Amount"} inputRef={amountInputRef}/>
+                        </Grid>
+                        <Grid item>
+                            <TextField label={"Location"} inputRef={locationInputRef}/>
+                        </Grid>
+                    </Grid>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={()=>{setOpen(false)}}>Cancel</Button>
