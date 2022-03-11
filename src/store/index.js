@@ -1,5 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit";
 import authSlice from "./auth-slice";
+import sortSlice from "./sort-slice";
 import storage from 'redux-persist/lib/storage';
 import {
     persistReducer,
@@ -13,13 +14,15 @@ import {
 import {combineReducers} from 'redux';
 
 
+
 const reducers = combineReducers({
-    auth: authSlice.reducer,
+    auth: authSlice.reducer, sort: sortSlice.reducer
 });
 
 const persistConfig = {
     key: 'root',
     storage,
+    whitelist: ['auth']
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
