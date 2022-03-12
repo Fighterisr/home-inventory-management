@@ -78,7 +78,7 @@ const NewItem = (props) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={()=>{setOpen(false)}}>Cancel</Button>
-                    <Button onClick={submitHandler}>Submit</Button>
+                    <Button color="success" onClick={submitHandler}>Submit</Button>
                 </DialogActions>
             </Dialog>
         </Fragment>

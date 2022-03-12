@@ -68,7 +68,7 @@ const EditItem = (props) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => {setOpen(false)}}>Cancel</Button>
-                    <Button onClick={submitHandler}>Submit</Button>
+                    <Button onClick={submitHandler} color="success">Submit</Button>
                 </DialogActions>
             </Dialog>
         </>

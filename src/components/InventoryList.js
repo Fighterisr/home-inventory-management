@@ -2,6 +2,7 @@ import InventoryItem from "./InventoryItem";
 import Paper from "@mui/material/Paper";
 import {useSelector} from "react-redux";
 import SortList from "./SortList";
+import {Card} from "@mui/material";
 
 const sortSelector = (type, asc) => {
     return (a, b) => {
@@ -40,9 +41,9 @@ const InventoryList = (props) => {
     return (
         <>
             <SortList/>
-            <Paper elevation={24}>
+            <Card elevation={24}>
                 {listItems}
-            </Paper>
+            </Card>
         </>
     )
 }

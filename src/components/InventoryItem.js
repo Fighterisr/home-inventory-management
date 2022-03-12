@@ -1,25 +1,30 @@
-import {Card, Container, Grid, ListItem, ListItemText} from "@mui/material";
+import {Card, Container, Grid, ListItem, ListItemText, Stack} from "@mui/material";
 import DeleteItem from "./DeleteItem";
 import EditItem from "./EditItem";
+import Typography from "@mui/material/Typography";
 
 
 const InventoryItem = props => {
 
 
     return (
-        <Card sx={{border: 1}}>
+        <Card variant="outlined">
             <ListItem>
                 <Container>
-                    <ListItemText>{props.name}</ListItemText>
+                    <ListItemText>
+                        <Typography color="blue" variant="h6">
+                            {props.name}
+                        </Typography>
+                    </ListItemText>
                     <ListItemText>{"Description: " + props.description}</ListItemText>
                     <ListItemText>{"Amount: " + props.amount}</ListItemText>
                     <ListItemText>{"Location: " + props.location}</ListItemText>
                 </Container>
-                <Grid>
+                <Stack spacing={1}>
                     <EditItem {...props} />
                     <DeleteItem index={props.index} inventoryItems={props.inventoryItems}
                                 setInventoryItems={props.setInventoryItems}/>
-                </Grid>
+                </Stack>
             </ListItem>
         </Card>
     )
