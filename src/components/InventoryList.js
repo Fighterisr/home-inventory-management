@@ -16,9 +16,17 @@ const sortSelector = (type, asc) => {
     }
 }
 
+const filterBy = (keyWord) => {
+    return (item) => item.props.name.toLowerCase().includes(keyWord) ||
+        item.props.description.toLowerCase().includes(keyWord) ||
+        item.props.location.toLowerCase().includes(keyWord)
+
+}
 
 const InventoryList = (props) => {
 
+
+    const filterSort = useSelector(state => state.filter)
     const stateSort = useSelector(state => state.sort)
 
     const listItems = props.inventoryItems.map((item, index) =>
@@ -32,16 +40,13 @@ const InventoryList = (props) => {
             inventoryItems={props.inventoryItems}
             setInventoryItems={props.setInventoryItems}
         />
-    ).sort(sortSelector(stateSort.sortType,stateSort.sortAsc))
-        // TODO
-        //     .filter((item) => {
-        //     return item.props.name.toLowerCase().includes('a')
-        // })
+    ).sort(sortSelector(stateSort.sortType, stateSort.sortAsc))
+        .filter(filterBy(filterSort.filterKeyWord))
 
     return (
         <>
             <SortList/>
-            <Card elevation={16} >
+            <Card elevation={16}>
                 {listItems}
             </Card>
         </>

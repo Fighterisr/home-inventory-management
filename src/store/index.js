@@ -12,11 +12,12 @@ import {
     REGISTER,
 } from 'redux-persist'
 import {combineReducers} from 'redux';
+import filterSlice from "./filter-slice";
 
 
 
 const reducers = combineReducers({
-    auth: authSlice.reducer, sort: sortSlice.reducer
+    auth: authSlice.reducer, sort: sortSlice.reducer, filter: filterSlice.reducer
 });
 
 const persistConfig = {
