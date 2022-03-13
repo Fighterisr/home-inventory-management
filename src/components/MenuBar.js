@@ -66,7 +66,7 @@ const MenuBar = props => {
                     </PopupState>
 
                     <Typography variant="h6">
-                        Super Amazing App
+                        Home Inventory Management
                     </Typography>
                 </Toolbar>
 
