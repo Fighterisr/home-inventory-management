@@ -41,7 +41,7 @@ const InventoryList = (props) => {
     return (
         <>
             <SortList/>
-            <Card elevation={24}>
+            <Card elevation={16} >
                 {listItems}
             </Card>
         </>
