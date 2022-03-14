@@ -12,7 +12,7 @@ const InventoryItem = props => {
             <ListItem>
                 <Container>
                     <ListItemText>
-                        <Typography color="blue" variant="h6">
+                        <Typography color="cornflowerblue" variant="h6">
                             {props.name}
                         </Typography>
                     </ListItemText>

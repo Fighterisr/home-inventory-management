@@ -39,7 +39,7 @@ const SortList = (props) => {
 
     return (
         <>
-            <Button variant="contained" onClick={() => setOpen(true)}>Sort</Button>
+            <Button  size="small" color="primary" variant="contained" onClick={() => setOpen(true)}>Sort</Button>
             <Dialog open={open}>
                 <DialogTitle>Sort List</DialogTitle>
                 <Divider/>

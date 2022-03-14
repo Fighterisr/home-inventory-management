@@ -16,6 +16,7 @@ import {AppBar, Divider, IconButton, Toolbar} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from "@mui/material/Typography";
 import FilterList from "./FilterList";
+import SortList from "./SortList";
 
 
 
@@ -69,6 +70,10 @@ const MenuBar = props => {
                     <Typography variant="h6">
                         Home Inventory Management
                     </Typography>
+
+                </Toolbar>
+                <Toolbar>
+                    <SortList/>
                     <FilterList/>
                 </Toolbar>
 
