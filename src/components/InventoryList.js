@@ -21,10 +21,9 @@ const filterBy = (keyWord) => {
 
 }
 
-const InventoryList = (props) => {
+const InventoryList = () => {
 
-    //TODO fix filterSort name to stateFilter
-    const filterSort = useSelector(state => state.filter)
+    const stateFilter = useSelector(state => state.filter)
     const stateSort = useSelector(state => state.sort)
     const inventoryItems = useSelector(state => state.inventoryItems.inventoryItems)
 
@@ -38,7 +37,7 @@ const InventoryList = (props) => {
             location={item.location}
         />
     ).sort(sortSelector(stateSort.sortType, stateSort.sortAsc))
-        .filter(filterBy(filterSort.filterKeyWord))
+        .filter(filterBy(stateFilter.filterKeyWord))
 
     return (
         <>
