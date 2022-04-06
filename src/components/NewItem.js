@@ -4,6 +4,8 @@ import {Fragment, useRef, useState} from "react";
 import {ref, set} from "firebase/database"
 import {db, auth} from "../firebase"
 import Grid from "@mui/material/Grid";
+import {useDispatch, useSelector} from "react-redux";
+import {inventoryItemsActions} from "../store/inventory-items-slice";
 
 const fabStyle = {
     position: 'absolute',
@@ -15,6 +17,9 @@ const fabStyle = {
 
 const NewItem = (props) => {
     const [open, setOpen] = useState(false);
+
+    const dispatch = useDispatch()
+    const inventoryItems = useSelector(state => state.inventoryItems.inventoryItems)
 
     const nameInputRef = useRef();
     const descriptionInputRef = useRef();
@@ -44,8 +49,8 @@ const NewItem = (props) => {
         const dbRef = ref(db, '/items/'+uid)
 
 
-        set(dbRef, [...props.inventoryItems, itemObj]);
-        props.setInventoryItems([...props.inventoryItems, itemObj])
+        set(dbRef, [...inventoryItems, itemObj]);
+        dispatch(inventoryItemsActions.setInventoryItems([...inventoryItems, itemObj]))
         setOpen(false);
 
 

@@ -4,7 +4,9 @@ import EditItem from "./EditItem";
 import Typography from "@mui/material/Typography";
 
 
+
 const InventoryItem = props => {
+
 
 
     return (
@@ -22,8 +24,7 @@ const InventoryItem = props => {
                 </Container>
                 <Stack spacing={1}>
                     <EditItem {...props} />
-                    <DeleteItem index={props.index} inventoryItems={props.inventoryItems}
-                                setInventoryItems={props.setInventoryItems}/>
+                    <DeleteItem {...props}/>
                 </Stack>
             </ListItem>
         </Card>

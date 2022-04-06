@@ -13,11 +13,13 @@ import {
 } from 'redux-persist'
 import {combineReducers} from 'redux';
 import filterSlice from "./filter-slice";
+import inventoryItemsSlice from "./inventory-items-slice";
 
 
 
 const reducers = combineReducers({
-    auth: authSlice.reducer, sort: sortSlice.reducer, filter: filterSlice.reducer
+    auth: authSlice.reducer, sort: sortSlice.reducer, filter: filterSlice.reducer,
+    inventoryItems: inventoryItemsSlice.reducer
 });
 
 const persistConfig = {

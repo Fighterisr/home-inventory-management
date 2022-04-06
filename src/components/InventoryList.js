@@ -1,7 +1,5 @@
 import InventoryItem from "./InventoryItem";
-import Paper from "@mui/material/Paper";
 import {useSelector} from "react-redux";
-import SortList from "./SortList";
 import {Card} from "@mui/material";
 
 const sortSelector = (type, asc) => {
@@ -25,11 +23,12 @@ const filterBy = (keyWord) => {
 
 const InventoryList = (props) => {
 
-
+    //TODO fix filterSort name to stateFilter
     const filterSort = useSelector(state => state.filter)
     const stateSort = useSelector(state => state.sort)
+    const inventoryItems = useSelector(state => state.inventoryItems.inventoryItems)
 
-    const listItems = props.inventoryItems.map((item, index) =>
+    const listItems = inventoryItems.map((item, index) =>
         <InventoryItem
             key={index}
             index={index}
@@ -37,8 +36,6 @@ const InventoryList = (props) => {
             description={item.description}
             amount={item.amount}
             location={item.location}
-            inventoryItems={props.inventoryItems}
-            setInventoryItems={props.setInventoryItems}
         />
     ).sort(sortSelector(stateSort.sortType, stateSort.sortAsc))
         .filter(filterBy(filterSort.filterKeyWord))

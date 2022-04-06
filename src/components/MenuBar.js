@@ -17,6 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Typography from "@mui/material/Typography";
 import FilterList from "./FilterList";
 import SortList from "./SortList";
+import PurchaseList from "./PurchaseList";
 
 
 
@@ -73,6 +74,7 @@ const MenuBar = props => {
 
                 </Toolbar>
                 <Toolbar>
+                    <PurchaseList/>
                     <SortList/>
                     <FilterList/>
                 </Toolbar>

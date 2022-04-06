@@ -3,10 +3,15 @@ import {useRef, useState} from "react";
 import {auth, db} from "../firebase";
 import {ref, set} from "firebase/database";
 import Grid from "@mui/material/Grid";
+import {useDispatch, useSelector} from "react-redux";
+import {inventoryItemsActions} from "../store/inventory-items-slice";
 
 
 const EditItem = (props) => {
     const [open, setOpen] = useState(false);
+
+    const dispatch = useDispatch()
+    const inventoryItems = useSelector(state => state.inventoryItems.inventoryItems)
 
     const nameInputRef = useRef();
     const descriptionInputRef = useRef();
@@ -37,10 +42,11 @@ const EditItem = (props) => {
         const uid = auth.currentUser.uid;
         const dbRef = ref(db, '/items/' + uid)
 
-        props.inventoryItems.splice(props.index,1,itemObj)
+        const inventoryItemsSpliced = [...inventoryItems]
+        inventoryItemsSpliced.splice(props.index,1,itemObj)
 
-        set(dbRef, [...props.inventoryItems]);
-        props.setInventoryItems([...props.inventoryItems])
+        set(dbRef, inventoryItemsSpliced);
+        dispatch(inventoryItemsActions.setInventoryItems([...inventoryItemsSpliced]))
         setOpen(false);
     }
 

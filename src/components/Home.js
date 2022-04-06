@@ -1,22 +1,26 @@
 import {db, auth} from "../firebase"
 import {ref, get} from "firebase/database"
-import {Fragment, useEffect, useState} from "react";
+import {Fragment, useEffect} from "react";
 import InventoryList from "./InventoryList";
 import NewItem from "./NewItem";
-import PurchaseList from "./PurchaseList";
+import {useDispatch, useSelector} from "react-redux";
+import {inventoryItemsActions} from "../store/inventory-items-slice";
+
 
 
 const Home = props => {
-    const [inventoryItems, setInventoryItems] = useState([]);
 
+    const dispatch = useDispatch()
     const getItems = () => {
         const uid = auth.currentUser.uid
         get(ref(db, '/items/' + uid)).then((snapshot) => {
             if (snapshot.val()) {
-                setInventoryItems(snapshot.val());
+                dispatch(inventoryItemsActions.setInventoryItems(snapshot.val()))
+
             }
         })
     }
+
 
     useEffect(() => {
         auth.onAuthStateChanged(() => {
@@ -27,9 +31,8 @@ const Home = props => {
 
     return (
         <Fragment>
-            <PurchaseList inventoryItems={inventoryItems} setInventoryItems={setInventoryItems}/>
-            <NewItem inventoryItems={inventoryItems} setInventoryItems={setInventoryItems}/>
-            <InventoryList inventoryItems={inventoryItems} setInventoryItems={setInventoryItems}/>
+            <NewItem/>
+            <InventoryList/>
         </Fragment>
     )
 }
