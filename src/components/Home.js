@@ -3,6 +3,7 @@ import {ref, get} from "firebase/database"
 import {Fragment, useEffect, useState} from "react";
 import InventoryList from "./InventoryList";
 import NewItem from "./NewItem";
+import PurchaseList from "./PurchaseList";
 
 
 const Home = props => {
@@ -26,6 +27,7 @@ const Home = props => {
 
     return (
         <Fragment>
+            <PurchaseList inventoryItems={inventoryItems} setInventoryItems={setInventoryItems}/>
             <NewItem inventoryItems={inventoryItems} setInventoryItems={setInventoryItems}/>
             <InventoryList inventoryItems={inventoryItems} setInventoryItems={setInventoryItems}/>
         </Fragment>
