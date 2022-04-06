@@ -17,7 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Typography from "@mui/material/Typography";
 import FilterList from "./FilterList";
 import SortList from "./SortList";
-import PurchaseList from "./PurchaseList";
+import PurchaseList from "./purchaseList/PurchaseList";
 
 
 
