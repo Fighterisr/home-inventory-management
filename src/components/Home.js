@@ -1,14 +1,14 @@
 import {db, auth} from "../firebase"
 import {ref, get} from "firebase/database"
-import {Fragment, useEffect} from "react";
+import {useEffect} from "react";
 import InventoryList from "./InventoryList";
 import NewItem from "./NewItem";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {inventoryItemsActions} from "../store/inventory-items-slice";
 
 
 
-const Home = props => {
+const Home = () => {
 
     const dispatch = useDispatch()
     const getItems = () => {
@@ -30,10 +30,10 @@ const Home = props => {
 
 
     return (
-        <Fragment>
+        <>
             <NewItem/>
             <InventoryList/>
-        </Fragment>
+        </>
     )
 }
 
