@@ -1,12 +1,12 @@
 import {Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider} from "@mui/material";
 import {useState} from "react";
-import {auth, db} from "../firebase";
+import {db} from "../../firebase";
 import {ref, set} from "firebase/database";
 import {useDispatch, useSelector} from "react-redux";
-import {inventoryItemsActions} from "../store/inventory-items-slice";
+import {purchaseListActions} from "../../store/purchase-list-slice";
 
 
-const DeleteItem = (props) => {
+const DeletePurchaseListItem = (props) => {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -14,16 +14,15 @@ const DeleteItem = (props) => {
     };
 
     const dispatch = useDispatch()
-    const inventoryItems = useSelector(state => state.inventoryItems.inventoryItems)
+    const purchaseList = useSelector(state => state.purchaseList.purchaseList)
 
     const deleteCurrentItem = () => {
-        const newArray = inventoryItems.filter((element,index) => index !== props.index)
+        const newArray = purchaseList.filter((element,index) => index !== props.index)
 
-        const uid = auth.currentUser.uid;
-        const dbRef = ref(db, '/items/'+uid)
+        const dbRef = ref(db, '/family/smith/purchaseList')
 
         set(dbRef, newArray);
-        dispatch(inventoryItemsActions.setInventoryItems([...newArray]))
+        dispatch(purchaseListActions.setPurchaseList([...newArray]))
         setOpen(false);
     }
 
@@ -47,4 +46,4 @@ const DeleteItem = (props) => {
     )
 }
 
-export default DeleteItem;
+export default DeletePurchaseListItem;

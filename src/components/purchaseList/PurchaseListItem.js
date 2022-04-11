@@ -1,5 +1,6 @@
 import {Card, Container, ListItem, ListItemText} from "@mui/material";
 import Typography from "@mui/material/Typography";
+import DeletePurchaseListItem from "./DeletePurchaseListItem";
 
 
 const PurchaseListItem = (props) => {
@@ -15,6 +16,7 @@ const PurchaseListItem = (props) => {
                     </ListItemText>
                     <ListItemText>{"Amount: " + props.amount}</ListItemText>
                 </Container>
+                <DeletePurchaseListItem {...props} />
             </ListItem>
         </Card>
     )
