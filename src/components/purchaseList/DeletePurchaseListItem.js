@@ -1,7 +1,5 @@
 import {Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider} from "@mui/material";
 import {useState} from "react";
-import {db} from "../../firebase";
-import {ref, set} from "firebase/database";
 import {useDispatch, useSelector} from "react-redux";
 import {purchaseListActions} from "../../store/purchase-list-slice";
 
@@ -19,9 +17,6 @@ const DeletePurchaseListItem = (props) => {
     const deleteCurrentItem = () => {
         const newArray = purchaseList.filter((element,index) => index !== props.index)
 
-        const dbRef = ref(db, '/family/smith/purchaseList')
-
-        set(dbRef, newArray);
         dispatch(purchaseListActions.setPurchaseList([...newArray]))
         setOpen(false);
     }

@@ -2,9 +2,7 @@ import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Fab,
 import AddIcon from "@mui/icons-material/Add";
 import Grid from "@mui/material/Grid";
 import {useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {db} from "../../firebase";
-import {ref, set} from "firebase/database";
+import {useDispatch} from "react-redux";
 import {purchaseListActions} from "../../store/purchase-list-slice";
 
 
@@ -20,7 +18,6 @@ const NewPurchaseListItem = () => {
         setOpen(true);
     };
     const dispatch = useDispatch()
-    const purchaseList = useSelector(state => state.purchaseList.purchaseList)
 
     const nameInputRef = useRef();
     const amountInputRef = useRef();
@@ -29,20 +26,15 @@ const NewPurchaseListItem = () => {
         event.preventDefault();
 
         const enteredName = nameInputRef.current.value;
-        const enteredAmount = amountInputRef.current.value;
-        const itemObj = {
+        const enteredAmount = parseInt(amountInputRef.current.value);
+        const newItem = {
             name: enteredName,
             description: "",
             amount: enteredAmount,
             location: ""
         }
 
-
-        const dbRef = ref(db, '/family/smith/purchaseList')
-
-
-        set(dbRef, [...purchaseList, itemObj]);
-        dispatch(purchaseListActions.setPurchaseList([...purchaseList, itemObj]))
+        dispatch(purchaseListActions.addPurchaseListItem(newItem))
         setOpen(false);
 
 
