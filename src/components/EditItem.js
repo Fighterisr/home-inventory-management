@@ -1,7 +1,5 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, TextField} from "@mui/material";
 import {useRef, useState} from "react";
-import {auth, db} from "../firebase";
-import {ref, set} from "firebase/database";
 import Grid from "@mui/material/Grid";
 import {useDispatch, useSelector} from "react-redux";
 import {inventoryItemsActions} from "../store/inventory-items-slice";
@@ -30,7 +28,7 @@ const EditItem = (props) => {
 
         const enteredName = nameInputRef.current.value;
         const enteredDescription = descriptionInputRef.current.value;
-        const enteredAmount = amountInputRef.current.value;
+        const enteredAmount = parseInt(amountInputRef.current.value);
         const enteredLocation = locationInputRef.current.value;
         const itemObj = {
             name: enteredName,
@@ -39,13 +37,8 @@ const EditItem = (props) => {
             location: enteredLocation
         }
 
-        const uid = auth.currentUser.uid;
-        const dbRef = ref(db, '/items/' + uid)
-
         const inventoryItemsSpliced = [...inventoryItems]
         inventoryItemsSpliced.splice(props.index,1,itemObj)
-
-        set(dbRef, inventoryItemsSpliced);
         dispatch(inventoryItemsActions.setInventoryItems([...inventoryItemsSpliced]))
         setOpen(false);
     }

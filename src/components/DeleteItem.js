@@ -1,7 +1,5 @@
 import {Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider} from "@mui/material";
 import {useState} from "react";
-import {auth, db} from "../firebase";
-import {ref, set} from "firebase/database";
 import {useDispatch, useSelector} from "react-redux";
 import {inventoryItemsActions} from "../store/inventory-items-slice";
 
@@ -19,10 +17,6 @@ const DeleteItem = (props) => {
     const deleteCurrentItem = () => {
         const newArray = inventoryItems.filter((element,index) => index !== props.index)
 
-        const uid = auth.currentUser.uid;
-        const dbRef = ref(db, '/items/'+uid)
-
-        set(dbRef, newArray);
         dispatch(inventoryItemsActions.setInventoryItems([...newArray]))
         setOpen(false);
     }

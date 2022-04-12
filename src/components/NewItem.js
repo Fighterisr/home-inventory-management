@@ -1,10 +1,8 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Fab, TextField} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import {Fragment, useRef, useState} from "react";
-import {ref, set} from "firebase/database"
-import {db, auth} from "../firebase"
 import Grid from "@mui/material/Grid";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {inventoryItemsActions} from "../store/inventory-items-slice";
 
 const fabStyle = {
@@ -15,11 +13,10 @@ const fabStyle = {
 
 
 
-const NewItem = (props) => {
+const NewItem = () => {
     const [open, setOpen] = useState(false);
 
     const dispatch = useDispatch()
-    const inventoryItems = useSelector(state => state.inventoryItems.inventoryItems)
 
     const nameInputRef = useRef();
     const descriptionInputRef = useRef();
@@ -36,24 +33,17 @@ const NewItem = (props) => {
 
         const enteredName = nameInputRef.current.value;
         const enteredDescription = descriptionInputRef.current.value;
-        const enteredAmount = amountInputRef.current.value;
+        const enteredAmount = parseInt(amountInputRef.current.value);
         const enteredLocation = locationInputRef.current.value;
-        const itemObj = {
+        const newItem = {
             name: enteredName,
             description: enteredDescription,
             amount: enteredAmount,
             location: enteredLocation
         }
 
-        const uid = auth.currentUser.uid;
-        const dbRef = ref(db, '/items/'+uid)
-
-
-        set(dbRef, [...inventoryItems, itemObj]);
-        dispatch(inventoryItemsActions.setInventoryItems([...inventoryItems, itemObj]))
+        dispatch(inventoryItemsActions.addInventoryItem(newItem))
         setOpen(false);
-
-
     }
 
     return (
