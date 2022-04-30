@@ -4,10 +4,10 @@ import {Card} from "@mui/material";
 
 const sortSelector = (type, asc) => {
     return (a, b) => {
-        if (a.props[type].toLowerCase() < b.props[type].toLowerCase()) {
+        if (a.props[type] < b.props[type]) {
             return asc ? -1 : 1
         }
-        if (a.props[type].toLowerCase() > b.props[type].toLowerCase()) {
+        if (a.props[type] > b.props[type]) {
             return asc ? 1 : -1
         }
         return 0
