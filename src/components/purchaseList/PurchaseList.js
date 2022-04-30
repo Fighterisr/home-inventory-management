@@ -17,10 +17,9 @@ const itemCheckboxHandler = (event, item) => {
         itemsToAdd.push(item)
     } else {
         let itemIndex = itemsToAdd.findIndex((itemToRemove) => itemToRemove.name === item.name)
-        itemsToAdd.splice(itemIndex,1)
+        itemsToAdd.splice(itemIndex, 1)
     }
 }
-
 
 
 const PurchaseList = () => {
@@ -47,7 +46,7 @@ const PurchaseList = () => {
     }
 
     useEffect(() => {
-            getItems();
+        getItems();
     }, [])
 
     const listItems = purchaseList.map((item, index) =>
@@ -77,7 +76,7 @@ const PurchaseList = () => {
                My Purchase List
             </Button>
             <Dialog fullScreen open={open}>
-                <AppBar sx={{ position: 'relative' }}>
+                <AppBar sx={{position: 'relative'}}>
                     <Toolbar>
                         <IconButton
                             edge="start"
@@ -85,9 +84,9 @@ const PurchaseList = () => {
                             onClick={handleClose}
                             aria-label="close"
                         >
-                            <CloseIcon />
+                            <CloseIcon/>
                         </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                        <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
                             Purchase List
                         </Typography>
                         <AddItemFromCategory/>

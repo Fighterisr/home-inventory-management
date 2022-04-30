@@ -6,7 +6,7 @@ import {
     Container,
     Dialog,
     IconButton,
-    ListItem, ListItemText,
+    ListItem, ListItemText, MenuItem, Select,
     Toolbar,
     Typography
 } from "@mui/material";
@@ -14,115 +14,7 @@ import {useState} from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import {purchaseListActions} from "../../store/purchase-list-slice";
 import {useDispatch} from "react-redux";
-
-const amount = 1
-
-const diary = [
-    {
-        name: "Milk",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Pudding",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Cheese",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Ice cream",
-        description: "",
-        amount,
-        location: ""
-    }
-]
-const meat = [
-    {
-        name: "Steak",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Ribbs",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Shnitzel",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Hamburger",
-        description: "",
-        amount,
-        location: ""
-    }
-]
-const toiletries = [
-    {
-        name: "Soap",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Shampoo",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Showering gel",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Toilet paper",
-        description: "",
-        amount,
-        location: ""
-    },
-
-]
-const vegetables = [
-    {
-        name: "Tomato",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Potato",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Lettuce",
-        description: "",
-        amount,
-        location: ""
-    },
-    {
-        name: "Cucumber",
-        description: "",
-        amount,
-        location: ""
-    },
-
-]
+import categories from "./categories";
 
 const PurchaseListItem = (props) => {
 
@@ -150,12 +42,13 @@ const itemCheckboxHandler = (event, item) => {
         itemsToAdd.push(item)
     } else {
         let itemIndex = itemsToAdd.findIndex((itemToRemove) => itemToRemove.name === item.name)
-        itemsToAdd.splice(itemIndex,1)
+        itemsToAdd.splice(itemIndex, 1)
     }
 }
 
 const AddItemFromCategory = () => {
     const [open, setOpen] = useState(false)
+    const [selectedCategory, setSelectedCategory] = useState(categories.diary.categoryName)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -165,13 +58,22 @@ const AddItemFromCategory = () => {
         setOpen(false);
     };
 
+    const categoryChangeHandler = event => {
+        setSelectedCategory(event.target.value)
+    }
+
     const dispatch = useDispatch()
 
     const addSelectedItemsToInventory = () => {
         itemsToAdd.forEach((item) => dispatch(purchaseListActions.addPurchaseListItem(item)))
     }
 
-    const listItems = diary.map((item, index) =>
+    const categoryList = Object.keys(categories).map((item, index) => {
+        let categoryName = categories[item].categoryName
+        return <MenuItem key={index} value={categoryName}>{categoryName}</MenuItem>
+    })
+
+    const listItems = categories[selectedCategory.toLowerCase()].items.map((item, index) =>
         <PurchaseListItem
             key={index}
             index={index}
@@ -187,8 +89,8 @@ const AddItemFromCategory = () => {
             <Button variant="contained" onClick={handleClickOpen}>
                 Add item from a category
             </Button>
-            <Dialog  fullScreen open={open}>
-                <AppBar sx={{ position: 'relative' }}>
+            <Dialog fullScreen open={open}>
+                <AppBar sx={{position: 'relative'}}>
                     <Toolbar>
                         <IconButton
                             edge="start"
@@ -196,17 +98,24 @@ const AddItemFromCategory = () => {
                             onClick={handleClose}
                             aria-label="close"
                         >
-                            <CloseIcon />
+                            <CloseIcon/>
                         </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                        <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
                             Items by category
                         </Typography>
+                        <Select
+                            value={selectedCategory}
+                            onChange={categoryChangeHandler}
+                        >
+                            {categoryList}
+                        </Select>
                         <Button variant="contained" onClick={addSelectedItemsToInventory}>
                             Add selected items to purchase list
                         </Button>
                     </Toolbar>
                 </AppBar>
                 {listItems}
+
             </Dialog>
         </>
     )
