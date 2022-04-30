@@ -8,13 +8,31 @@ import {
     IconButton,
     ListItem, ListItemText, MenuItem, Select,
     Toolbar,
-    Typography
+    Typography,
 } from "@mui/material";
+import { makeStyles, useTheme } from '@mui/styles';
 import {useState} from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import {purchaseListActions} from "../../store/purchase-list-slice";
 import {useDispatch} from "react-redux";
 import categories from "./categories";
+
+
+const useStyles = makeStyles(theme => ({
+    select: {
+
+        display: "flex",
+        flex: 1,
+        justifyContent: "left",
+    },
+    bottom:{
+        display: "flex",
+        flex: 1,
+        justifyContent: "right",
+    }
+}))
+
+
 
 const PurchaseListItem = (props) => {
 
@@ -37,6 +55,8 @@ const PurchaseListItem = (props) => {
 
 const itemsToAdd = []
 
+
+
 const itemCheckboxHandler = (event, item) => {
     if (event.target.checked) {
         itemsToAdd.push(item)
@@ -47,6 +67,8 @@ const itemCheckboxHandler = (event, item) => {
 }
 
 const AddItemFromCategory = () => {
+    const classes = useStyles();
+
     const [open, setOpen] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState(categories.diary.categoryName)
 
@@ -103,18 +125,32 @@ const AddItemFromCategory = () => {
                         <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
                             Items by category
                         </Typography>
-                        <Select
-                            value={selectedCategory}
-                            onChange={categoryChangeHandler}
-                        >
-                            {categoryList}
-                        </Select>
-                        <Button variant="contained" onClick={addSelectedItemsToInventory}>
-                            Add selected items to purchase list
-                        </Button>
                     </Toolbar>
+                    <Toolbar>
+                        <Typography sx = {{ml: 2}} variant="h6" >
+                            Category:
+                        </Typography>
+                        <div className={classes.select}>
+                         <Select
+                             sx = {{ml: 2, color:"white" , width: 150,  border: '1px solid #ced4da',
+                         }}
+                            value={selectedCategory} onChange={categoryChangeHandler}
+                         >
+                            {categoryList}
+                         </Select>
+                        </div>
+                    </Toolbar>
+
+
                 </AppBar>
                 {listItems}
+                <Toolbar
+                className={classes.bottom}
+                >
+                    <Button variant="contained" onClick={addSelectedItemsToInventory}>
+                        Add selected items to purchase list
+                    </Button>
+                </Toolbar>
 
             </Dialog>
         </>
