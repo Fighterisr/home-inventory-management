@@ -1,4 +1,4 @@
-import {Card, Container, ListItem, ListItemText} from "@mui/material";
+import {Card, Checkbox, Container, ListItem, ListItemText} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import DeletePurchaseListItem from "./DeletePurchaseListItem";
 
@@ -8,6 +8,7 @@ const PurchaseListItem = (props) => {
     return (
         <Card variant="outlined">
             <ListItem>
+                <Checkbox onChange={(event) => props.changeHandler(event, props.itemRef)}/>
                 <Container>
                     <ListItemText>
                         <Typography color="cornflowerblue" variant="h6">
