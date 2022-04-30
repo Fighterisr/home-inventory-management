@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {purchaseListActions} from "../../store/purchase-list-slice";
 import NewPurchaseListItem from "./NewPurchaseListItem";
 import {inventoryItemsActions} from "../../store/inventory-items-slice";
+import AddItemFromCategory from "./AddItemFromCategory";
 
 const itemsToAdd = []
 
@@ -64,6 +65,7 @@ const PurchaseList = () => {
         itemsToAdd.forEach((item) => dispatch(inventoryItemsActions.addInventoryItem(item)))
         const newPurchaseList = purchaseList.filter((item) => !itemsToAdd.includes(item))
         dispatch(purchaseListActions.setPurchaseList([...newPurchaseList]))
+        itemsToAdd.length = 0 // clears the array of selected items
         //TODO add lastPurchaseList logic
 
 
@@ -88,6 +90,7 @@ const PurchaseList = () => {
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                             Purchase List
                         </Typography>
+                        <AddItemFromCategory/>
                         <Button variant="contained" onClick={addSelectedItemsToInventory}>
                             Add selected items to inventory list
                         </Button>
