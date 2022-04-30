@@ -43,6 +43,86 @@ const diary = [
         location: ""
     }
 ]
+const meat = [
+    {
+        name: "Steak",
+        description: "",
+        amount,
+        location: ""
+    },
+    {
+        name: "Ribbs",
+        description: "",
+        amount,
+        location: ""
+    },
+    {
+        name: "Shnitzel",
+        description: "",
+        amount,
+        location: ""
+    },
+    {
+        name: "Hamburger",
+        description: "",
+        amount,
+        location: ""
+    }
+]
+const toiletries = [
+    {
+        name: "Soap",
+        description: "",
+        amount,
+        location: ""
+    },
+    {
+        name: "Shampoo",
+        description: "",
+        amount,
+        location: ""
+    },
+    {
+        name: "Showering gel",
+        description: "",
+        amount,
+        location: ""
+    },
+    {
+        name: "Toilet paper",
+        description: "",
+        amount,
+        location: ""
+    },
+
+]
+const vegetables = [
+    {
+        name: "Tomato",
+        description: "",
+        amount,
+        location: ""
+    },
+    {
+        name: "Potato",
+        description: "",
+        amount,
+        location: ""
+    },
+    {
+        name: "Lettuce",
+        description: "",
+        amount,
+        location: ""
+    },
+    {
+        name: "Cucumber",
+        description: "",
+        amount,
+        location: ""
+    },
+
+]
 
 const PurchaseListItem = (props) => {
 
