@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {db} from "../../firebase"
 import {ref, get} from "firebase/database"
-import {AppBar, Button, Dialog, IconButton, Toolbar, Typography} from "@mui/material";
+import {Alert, AppBar, Button, Dialog, IconButton, Snackbar, Toolbar, Typography} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import PurchaseListItem from "./PurchaseListItem";
 import {useDispatch, useSelector} from "react-redux";
@@ -24,6 +24,7 @@ const itemCheckboxHandler = (event, item) => {
 
 const PurchaseList = () => {
     const [open, setOpen] = useState(false)
+    const [openAlert, setOpenAlert] = useState(false)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -61,19 +62,21 @@ const PurchaseList = () => {
     )
 
     const addSelectedItemsToInventory = () => {
-        itemsToAdd.forEach((item) => dispatch(inventoryItemsActions.addInventoryItem(item)))
-        const newPurchaseList = purchaseList.filter((item) => !itemsToAdd.includes(item))
-        dispatch(purchaseListActions.setPurchaseList([...newPurchaseList]))
-        itemsToAdd.length = 0 // clears the array of selected items
-        //TODO add lastPurchaseList logic
-
+        if(itemsToAdd.length) {
+            itemsToAdd.forEach((item) => dispatch(inventoryItemsActions.addInventoryItem(item)))
+            const newPurchaseList = purchaseList.filter((item) => !itemsToAdd.includes(item))
+            dispatch(purchaseListActions.setPurchaseList([...newPurchaseList]))
+            itemsToAdd.length = 0 // clears the array of selected items
+            setOpenAlert(true)
+            //TODO add lastPurchaseList logic
+        }
 
     }
 
     return (
         <>
-            <Button color= "success" variant="contained" onClick={handleClickOpen}>
-               My Purchase List
+            <Button color="success" variant="contained" onClick={handleClickOpen}>
+                My Purchase List
             </Button>
             <Dialog fullScreen open={open}>
                 <AppBar sx={{position: 'relative'}}>
@@ -97,6 +100,13 @@ const PurchaseList = () => {
                 </AppBar>
                 {listItems}
                 <NewPurchaseListItem/>
+                <Snackbar open={openAlert} autoHideDuration={6000} onClose={() => setOpenAlert(false)}
+                          anchorOrigin={{vertical: "bottom", horizontal: "center"}}
+                >
+                    <Alert severity="success" >
+                        Selected items have been added to your inventory successfully
+                    </Alert>
+                </Snackbar>
             </Dialog>
         </>
     )
