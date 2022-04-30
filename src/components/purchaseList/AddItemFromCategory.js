@@ -21,6 +21,7 @@ import categories from "./categories";
 const useStyles = makeStyles(theme => ({
     select: {
 
+
         display: "flex",
         flex: 1,
         justifyContent: "left",
@@ -132,7 +133,7 @@ const AddItemFromCategory = () => {
                         </Typography>
                         <div className={classes.select}>
                          <Select
-                             sx = {{ml: 2, color:"white" , width: 150,  border: '1px solid #ced4da',
+                             sx = {{ml: 2, bgcolor:"white" , width: 150,  border: '1px solid #ced4da',
                          }}
                             value={selectedCategory} onChange={categoryChangeHandler}
                          >
