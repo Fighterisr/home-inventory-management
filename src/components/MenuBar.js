@@ -18,10 +18,20 @@ import Typography from "@mui/material/Typography";
 import FilterList from "./FilterList";
 import SortList from "./SortList";
 import PurchaseList from "./purchaseList/PurchaseList";
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles(theme => ({
+    toolbutton: {
+        display : "flex",
+        flex: 1,
+        justifyContent: "right"
+    }
+}))
 
 
 
 const MenuBar = props => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const logoutHandler = () => {
         dispatch(authActions.logout());
@@ -74,9 +84,12 @@ const MenuBar = props => {
 
                 </Toolbar>
                 <Toolbar>
-                    <PurchaseList/>
                     <SortList/>
+
                     <FilterList/>
+                    <div className={classes.toolbutton}>
+                        <PurchaseList/>
+                    </div>
                 </Toolbar>
 
             </AppBar>

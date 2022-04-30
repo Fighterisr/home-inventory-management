@@ -73,8 +73,8 @@ const PurchaseList = () => {
 
     return (
         <>
-            <Button variant="contained" onClick={handleClickOpen}>
-                Purchase List
+            <Button color= "success" variant="contained" onClick={handleClickOpen}>
+               My Purchase List
             </Button>
             <Dialog fullScreen open={open}>
                 <AppBar sx={{ position: 'relative' }}>
