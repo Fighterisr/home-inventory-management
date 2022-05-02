@@ -15,12 +15,14 @@ import {combineReducers} from 'redux';
 import filterSlice from "./filter-slice";
 import inventoryItemsSlice from "./inventory-items-slice";
 import purchaseListSlice from "./purchase-list-slice";
+import lastPurchaseSlice from "./last-purchase-slice";
 
 
 
 const reducers = combineReducers({
     auth: authSlice.reducer, sort: sortSlice.reducer, filter: filterSlice.reducer,
-    inventoryItems: inventoryItemsSlice.reducer, purchaseList: purchaseListSlice.reducer
+    inventoryItems: inventoryItemsSlice.reducer, purchaseList: purchaseListSlice.reducer,
+    lastPurchase: lastPurchaseSlice.reducer
 });
 
 const persistConfig = {

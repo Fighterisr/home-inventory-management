@@ -9,6 +9,8 @@ import {purchaseListActions} from "../../store/purchase-list-slice";
 import NewPurchaseListItem from "./NewPurchaseListItem";
 import {inventoryItemsActions} from "../../store/inventory-items-slice";
 import AddItemFromCategory from "./AddItemFromCategory";
+import AddFromLastPurchase from "./AddFromLastPurchase";
+import {lastPurchaseActions} from "../../store/last-purchase-slice";
 
 const itemsToAdd = []
 
@@ -63,12 +65,14 @@ const PurchaseList = () => {
 
     const addSelectedItemsToInventory = () => {
         if(itemsToAdd.length) {
-            itemsToAdd.forEach((item) => dispatch(inventoryItemsActions.addInventoryItem(item)))
+            itemsToAdd.forEach((item) => {
+                dispatch(inventoryItemsActions.addInventoryItem(item))
+                dispatch(lastPurchaseActions.addLastPurchaseItem(item))
+            })
             const newPurchaseList = purchaseList.filter((item) => !itemsToAdd.includes(item))
             dispatch(purchaseListActions.setPurchaseList([...newPurchaseList]))
             itemsToAdd.length = 0 // clears the array of selected items
             setOpenAlert(true)
-            //TODO add lastPurchaseList logic
         }
 
     }
@@ -92,8 +96,9 @@ const PurchaseList = () => {
                         <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
                             Purchase List
                         </Typography>
+                        <AddFromLastPurchase/>
                         <AddItemFromCategory/>
-                        <Button variant="contained" onClick={addSelectedItemsToInventory}>
+                        <Button color="success"  variant="contained" onClick={addSelectedItemsToInventory} sx={{ml: 2}}>
                             Add selected items to inventory list
                         </Button>
                     </Toolbar>
