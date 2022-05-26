@@ -62,8 +62,6 @@ const MenuBar = props => {
                                                 Profile
                                             </ListItemText>
                                         </MenuItem>
-                                        <MenuItem onClick={popupState.close}>???</MenuItem>
-
                                         <MenuItem onClick={popupState.close} onClick={logoutHandler}>
                                             <ListItemIcon>
                                                 <LockOpenIcon fontSize="small"/>
