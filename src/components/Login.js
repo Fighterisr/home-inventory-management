@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {auth} from "../firebase";
 import {signInWithEmailAndPassword} from 'firebase/auth'
@@ -18,6 +18,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {Alert, Snackbar} from "@mui/material";
 
 const theme = createTheme();
 
@@ -26,24 +27,27 @@ const Login = props => {
     const passwordInputRef = useRef();
     const dispatch = useDispatch();
 
+    const [openAlert, setOpenAlert] = useState(false)
 
-    const submitHandler = event => {
+    const submitHandler = async event => {
         event.preventDefault();
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
 
         // TODO: check for form validation
         props.setIsLoading(true);
-
-        signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                const userObj = {
-                    token: user.accessToken
-                }
-                dispatch(authActions.login(userObj))
-                props.setIsLoading(false);
-            });
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
+            const user = userCredential.user;
+            const userObj = {
+                token: user.accessToken
+            }
+            dispatch(authActions.login(userObj))
+            props.setIsLoading(false);
+        }
+        catch(err) {
+            setOpenAlert(true)
+        }
     }
 
     return (
@@ -98,6 +102,13 @@ const Login = props => {
                     </Box>
                 </Box>
             </Container>
+            <Snackbar open={openAlert} autoHideDuration={6000} onClose={() => setOpenAlert(false)}
+                      anchorOrigin={{vertical: "top", horizontal: "center"}} style={{top: "35%"}}
+            >
+                <Alert severity="error">
+                    Wrong email or password entered, try again.
+                </Alert>
+            </Snackbar>
         </ThemeProvider>
     )
 }
