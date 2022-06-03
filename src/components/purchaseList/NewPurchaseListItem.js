@@ -66,7 +66,7 @@ const NewPurchaseListItem = () => {
                         </Grid>
                         <Grid item>
                             <TextField label={"Amount"} inputRef={amountInputRef}
-                                       inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}/>
+                                       inputProps={{ inputMode: 'numeric'}}/>
                         </Grid>
                     </Grid>
                 </DialogContent>
