@@ -33,8 +33,18 @@ const NewItem = () => {
 
         const enteredName = nameInputRef.current.value;
         const enteredDescription = descriptionInputRef.current.value;
-        const enteredAmount = parseInt(amountInputRef.current.value);
+        let enteredAmount = amountInputRef.current.value;
         const enteredLocation = locationInputRef.current.value;
+
+        if(enteredName.length === 0)
+            return
+
+        if(enteredAmount.match(/[1-9]/)) {
+            enteredAmount = parseInt(enteredAmount)
+        } else {
+            return
+        }
+
         const newItem = {
             name: enteredName,
             description: enteredDescription,
@@ -64,7 +74,8 @@ const NewItem = () => {
                             <TextField label={"Description"} inputRef={descriptionInputRef}/>
                         </Grid>
                         <Grid item>
-                            <TextField label={"Amount"} inputRef={amountInputRef}/>
+                            <TextField label={"Amount"} inputRef={amountInputRef}
+                                       inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}/>
                         </Grid>
                         <Grid item>
                             <TextField label={"Location"} inputRef={locationInputRef}/>

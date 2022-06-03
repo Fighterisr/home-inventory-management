@@ -18,7 +18,6 @@ const EditItem = (props) => {
 
 
 
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -28,8 +27,18 @@ const EditItem = (props) => {
 
         const enteredName = nameInputRef.current.value;
         const enteredDescription = descriptionInputRef.current.value;
-        const enteredAmount = parseInt(amountInputRef.current.value);
+        let enteredAmount = amountInputRef.current.value;
         const enteredLocation = locationInputRef.current.value;
+
+        if(enteredName.length === 0)
+            return
+
+        if(enteredAmount.match(/[1-9]/)) {
+            enteredAmount = parseInt(enteredAmount)
+        } else {
+            return
+        }
+
         const itemObj = {
             name: enteredName,
             description: enteredDescription,
@@ -58,7 +67,8 @@ const EditItem = (props) => {
                             <TextField label={"Description"} inputRef={descriptionInputRef} defaultValue={props.description}/>
                         </Grid>
                         <Grid item>
-                            <TextField label={"Amount"} inputRef={amountInputRef} defaultValue={props.amount}/>
+                            <TextField label={"Amount"} inputRef={amountInputRef} defaultValue={props.amount}
+                                       inputProps={{ inputMode: 'numeric'}}/>
                         </Grid>
                         <Grid item>
                             <TextField label={"Location"} inputRef={locationInputRef} defaultValue={props.location}/>
