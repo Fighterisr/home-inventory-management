@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import {auth} from "../firebase";
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 
@@ -21,20 +21,33 @@ const theme = createTheme();
 const Register = props => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
+    const repeatPasswordInputRef = useRef();
+
+    const [passwordError, setPasswordError] = useState("")
+    const [repeatPasswordError, setRepeatPasswordError] = useState("")
 
 
-
-    const submitHandler = event => {
+    const submitHandler = async event => {
         event.preventDefault();
 
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
+        const enteredRepeatPassword = repeatPasswordInputRef.current.value;
 
-        createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-            });
+        setPasswordError("")
+        setRepeatPasswordError("")
+
+        if(enteredPassword.length < 6){
+            setPasswordError("Password should be at least 6 characters.")
+            return
+        }
+
+        if(enteredPassword !== enteredRepeatPassword){
+            setRepeatPasswordError("Password and Repeat Password do not match.")
+            return
+        }
+
+        await createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
     }
 
 
@@ -70,6 +83,8 @@ const Register = props => {
                             inputRef={emailInputRef}
                         />
                         <TextField
+                            error={passwordError.length !== 0}
+                            helperText={passwordError}
                             htmlFor="password"
                             margin="normal"
                             required
@@ -80,6 +95,19 @@ const Register = props => {
                             id="password"
                             autoComplete="current-password"
                             inputRef={passwordInputRef}
+                        />
+                        <TextField
+                            error={repeatPasswordError.length !== 0}
+                            helperText={repeatPasswordError}
+                            htmlFor="repeatPassword"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="repeatPassword"
+                            label="Repeat Password"
+                            type="password"
+                            id="repeatPassword"
+                            inputRef={repeatPasswordInputRef}
                         />
                         <Button type="submit"
                                 fullWidth
