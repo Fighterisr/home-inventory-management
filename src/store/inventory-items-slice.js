@@ -20,7 +20,7 @@ const inventoryItemsSlice = createSlice({
             },
             addInventoryItem(state, action) {
                 const newItem = action.payload;
-                const existingItem = state.inventoryItems.find((item) => item.name === newItem.name);
+                const existingItem = state.inventoryItems.find((item) => item.name.toLowerCase() === newItem.name.toLowerCase());
                 if (!existingItem) {
                     state.inventoryItems.push({
                         name: newItem.name,

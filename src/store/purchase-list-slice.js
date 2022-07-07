@@ -17,7 +17,7 @@ const purchaseListSlice = createSlice({
         },
         addPurchaseListItem(state, action) {
             const newItem = action.payload;
-            const existingItem = state.purchaseList.find((item) => item.name === newItem.name);
+            const existingItem = state.purchaseList.find((item) => item.name.toLowerCase() === newItem.name.toLowerCase());
             if (!existingItem) {
                 state.purchaseList.push({
                     name: newItem.name,

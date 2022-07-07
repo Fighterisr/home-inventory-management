@@ -1,33 +1,29 @@
 import {useDispatch} from "react-redux";
 import {authActions} from "../store/auth-slice";
 import UserPortrait from "./UserPortrait";
-import {Fragment} from "react";
 
-import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Paper from '@mui/material/Paper';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import PopupState, {bindTrigger, bindMenu} from 'material-ui-popup-state';
-import {AppBar, Divider, IconButton, Toolbar} from "@mui/material";
+import {AppBar, IconButton, Toolbar} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from "@mui/material/Typography";
 import FilterList from "./FilterList";
 import SortList from "./SortList";
 import PurchaseList from "./purchaseList/PurchaseList";
-import { makeStyles } from '@mui/styles';
+import {makeStyles} from '@mui/styles';
+import {useState} from "react";
 
 const useStyles = makeStyles(theme => ({
     toolbutton: {
-        display : "flex",
+        display: "flex",
         flex: 1,
         justifyContent: "right"
     }
 }))
-
 
 
 const MenuBar = props => {
@@ -37,60 +33,69 @@ const MenuBar = props => {
         dispatch(authActions.logout());
     }
 
+    // const [open, setOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+        // setAnchorEl(document.getElementById('menu'));
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     return (
-            <AppBar position="static" elevation={0} >
-                <Toolbar>
-                    <PopupState variant="popover" popupId="demo-popup-menu">
-                        {(popupState) => (
-                            <div>
-                                <IconButton  {...bindTrigger(popupState)}>
-                                    <MenuIcon/>
-                                </IconButton>
-                                <Menu  {...bindMenu(popupState)}>
-                                    <Paper color="cyan" sx={{width: 320}}>
-                                        <MenuItem>
-                                            <ListItemIcon>
-                                                <UserPortrait/>
-                                            </ListItemIcon>
-                                        </MenuItem>
-                                        <MenuItem onClick={popupState.close}>
-                                            <ListItemIcon>
-                                                <AccountBoxIcon/>
-                                            </ListItemIcon>
-                                            <ListItemText>
-                                                Profile
-                                            </ListItemText>
-                                        </MenuItem>
-                                        <MenuItem onClick={popupState.close} onClick={logoutHandler}>
-                                            <ListItemIcon>
-                                                <LockOpenIcon fontSize="small"/>
-                                            </ListItemIcon>
-                                            <ListItemText>
-                                                Logout
-                                            </ListItemText>
-                                        </MenuItem>
-                                    </Paper>
-                                </Menu>
-                            </div>
-                        )}
-                    </PopupState>
+        <AppBar position="static" elevation={0}>
+            <Toolbar>
+                <IconButton onClick={handleClick}>
+                    <MenuIcon/>
+                </IconButton>
+                <Menu id="menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                >
+                    <MenuItem>
+                        <ListItemIcon>
+                            <UserPortrait/>
+                        </ListItemIcon>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                            <AccountBoxIcon/>
+                        </ListItemIcon>
+                        <ListItemText>
+                            Profile
+                        </ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose} onClick={logoutHandler}>
+                        <ListItemIcon>
+                            <LockOpenIcon fontSize="small"/>
+                        </ListItemIcon>
+                        <ListItemText>
+                            Logout
+                        </ListItemText>
+                    </MenuItem>
+                </Menu>
 
-                    <Typography variant="h6">
-                        Home Inventory Management
-                    </Typography>
 
-                </Toolbar>
-                <Toolbar>
-                    <SortList/>
+                <Typography variant="h6">
+                    Home Inventory Management
+                </Typography>
 
-                    <FilterList/>
-                    <div className={classes.toolbutton}>
-                        <PurchaseList/>
-                    </div>
-                </Toolbar>
+            </Toolbar>
+            <Toolbar>
+                <SortList/>
 
-            </AppBar>
+                <FilterList/>
+                <div className={classes.toolbutton}>
+                    <PurchaseList/>
+                </div>
+            </Toolbar>
+
+        </AppBar>
     )
 }
 
