@@ -8,7 +8,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import {AppBar, IconButton, Toolbar} from "@mui/material";
+import {AppBar, Divider, IconButton, Toolbar} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from "@mui/material/Typography";
 import FilterList from "./FilterList";
@@ -16,6 +16,7 @@ import SortList from "./SortList";
 import PurchaseList from "./purchaseList/PurchaseList";
 import {makeStyles} from '@mui/styles';
 import {useState} from "react";
+
 
 const useStyles = makeStyles(theme => ({
     toolbutton: {
@@ -51,25 +52,30 @@ const MenuBar = props => {
             <Toolbar>
                 <IconButton onClick={handleClick}>
                     <MenuIcon/>
+
                 </IconButton>
                 <Menu id="menu"
                       anchorEl={anchorEl}
                       open={open}
                       onClose={handleClose}
+
                 >
-                    <MenuItem>
+                    <MenuItem sx={{ width : 200}}>
                         <ListItemIcon>
                             <UserPortrait/>
                         </ListItemIcon>
                     </MenuItem>
+                    <Divider style={{fill: "black"}} sx={{ my: 0.5 }} />
                     <MenuItem onClick={handleClose}>
                         <ListItemIcon>
                             <AccountBoxIcon/>
                         </ListItemIcon>
+
                         <ListItemText>
                             Profile
                         </ListItemText>
                     </MenuItem>
+
                     <MenuItem onClick={handleClose} onClick={logoutHandler}>
                         <ListItemIcon>
                             <LockOpenIcon fontSize="small"/>
