@@ -38,10 +38,11 @@ const PurchaseList = () => {
 
     const dispatch = useDispatch()
     const purchaseList = useSelector(state => state.purchaseList.purchaseList)
+    const familyName = useSelector(state => state.purchaseList.familyName)
 
 
     const getItems = () => {
-        get(ref(db, '/family/smith/purchaseList')).then((snapshot) => {
+        get(ref(db, `/family/${familyName}/purchaseList`)).then((snapshot) => {
             if (snapshot.val()) {
                 dispatch(purchaseListActions.setPurchaseList(snapshot.val()))
             }
@@ -50,7 +51,8 @@ const PurchaseList = () => {
 
     useEffect(() => {
         getItems();
-    }, [])
+        console.log(familyName)
+    }, [familyName])
 
     const listItems = purchaseList.map((item, index) =>
         <PurchaseListItem
@@ -103,7 +105,8 @@ const PurchaseList = () => {
                         </Button>
                     </Toolbar>
                 </AppBar>
-                {listItems}
+                {!listItems.length && <h1 align={"center"}>There are no items in the list.</h1>}
+                {listItems.length > 0 && listItems}
                 <NewPurchaseListItem/>
                 <Snackbar open={openAlert} autoHideDuration={6000} onClose={() => setOpenAlert(false)}
                           anchorOrigin={{vertical: "bottom", horizontal: "center"}}

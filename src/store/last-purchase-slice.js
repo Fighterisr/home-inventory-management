@@ -2,18 +2,19 @@ import {createSlice} from "@reduxjs/toolkit";
 import {db} from "../firebase";
 import {ref, set} from "firebase/database";
 
-const dbRef = ref(db, '/family/smith/lastPurchase')
-
+let dbRef;
 const maxItems = 50
 
 const lastPurchaseSlice = createSlice({
     name: 'lastPurchase',
     initialState: {
-        lastPurchase: []
+        lastPurchase: [],
+        familyName: "Smith"
     },
     reducers: {
         setLastPurchase(state, action) {
             state.lastPurchase = action.payload
+            dbRef = ref(db, `/family/${state.familyName}/lastPurchase`)
             set(dbRef, state.lastPurchase);
         },
         addLastPurchaseItem(state, action) {
@@ -29,8 +30,12 @@ const lastPurchaseSlice = createSlice({
                     amount: 1,
                     location: ""
                 });
+                dbRef = ref(db, `/family/${state.familyName}/lastPurchase`)
                 set(dbRef, state.lastPurchase);
             }
+        },
+        setFamilyName(state, action) {
+            state.familyName = action.payload;
         }
     }
 })

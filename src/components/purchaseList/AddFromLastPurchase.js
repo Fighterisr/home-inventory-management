@@ -85,6 +85,7 @@ const AddFromLastPurchase = () => {
 
     const dispatch = useDispatch()
     const lastPurchase = useSelector(state => state.lastPurchase.lastPurchase)
+    const familyName = useSelector(state => state.lastPurchase.familyName)
 
 
     const addSelectedItemsToInventory = () => {
@@ -95,7 +96,7 @@ const AddFromLastPurchase = () => {
     }
 
     const getItems = () => {
-        get(ref(db, '/family/smith/lastPurchase')).then((snapshot) => {
+        get(ref(db, `/family/${familyName}/lastPurchase`)).then((snapshot) => {
             if (snapshot.val()) {
                 dispatch(lastPurchaseActions.setLastPurchase(snapshot.val()))
             }

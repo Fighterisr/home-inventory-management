@@ -16,6 +16,7 @@ import SortList from "./SortList";
 import PurchaseList from "./purchaseList/PurchaseList";
 import {makeStyles} from '@mui/styles';
 import {useState} from "react";
+import Profile from "./Profile";
 
 
 const useStyles = makeStyles(theme => ({
@@ -36,15 +37,24 @@ const MenuBar = props => {
 
     // const [open, setOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [openDialogName, setOpenDialog] = useState(null);
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
-        // setAnchorEl(document.getElementById('menu'));
     };
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const openProfileDialog = () => {
+        setOpenDialog('Profile');
+        handleClose();
+    };
+
+    const closeDialog = () => {
+        setOpenDialog(null);
     };
 
     return (
@@ -66,7 +76,7 @@ const MenuBar = props => {
                         </ListItemIcon>
                     </MenuItem>
                     <Divider style={{fill: "black"}} sx={{ my: 0.5 }} />
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={openProfileDialog}>
                         <ListItemIcon>
                             <AccountBoxIcon/>
                         </ListItemIcon>
@@ -87,6 +97,8 @@ const MenuBar = props => {
                 </Menu>
 
 
+
+
                 <Typography variant="h6">
                     Home Inventory Management
                 </Typography>
@@ -101,7 +113,9 @@ const MenuBar = props => {
                 </div>
             </Toolbar>
 
+            <Profile open={openDialogName === 'Profile'} onClose={closeDialog} />
         </AppBar>
+
     )
 }
 

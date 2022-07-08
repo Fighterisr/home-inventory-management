@@ -2,17 +2,18 @@ import {createSlice} from "@reduxjs/toolkit";
 import {db} from "../firebase";
 import {ref, set} from "firebase/database";
 
-
-const dbRef = ref(db, '/family/smith/purchaseList')
+let dbRef;
 
 const purchaseListSlice = createSlice({
     name: 'purchaseList',
     initialState: {
-        purchaseList: []
+        purchaseList: [],
+        familyName: "Smith"
     },
     reducers: {
         setPurchaseList(state, action) {
             state.purchaseList = action.payload
+            dbRef = ref(db, `/family/${state.familyName}/purchaseList`)
             set(dbRef, state.purchaseList);
         },
         addPurchaseListItem(state, action) {
@@ -28,7 +29,11 @@ const purchaseListSlice = createSlice({
             } else {
                 existingItem.amount += newItem.amount
             }
+            dbRef = ref(db, `/family/${state.familyName}/purchaseList`)
             set(dbRef, state.purchaseList);
+        },
+        setFamilyName(state, action) {
+            state.familyName = action.payload;
         }
     }
 })
