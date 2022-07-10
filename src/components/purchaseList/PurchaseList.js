@@ -51,7 +51,6 @@ const PurchaseList = () => {
 
     useEffect(() => {
         getItems();
-        console.log(familyName)
     }, [familyName])
 
     const listItems = purchaseList.map((item, index) =>

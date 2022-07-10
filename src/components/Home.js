@@ -21,7 +21,6 @@ const Home = () => {
             }
         })
         get(ref(db, `/profile/${uid}/familyName`)).then((snapshot) => {
-            console.log(`uid: ${uid} and snapshot: ${snapshot.val()} and ref: ${ref}`)
             if(snapshot.val()) {
                 dispatch(purchaseListActions.setFamilyName(snapshot.val()))
                 dispatch(lastPurchaseActions.setFamilyName(snapshot.val()))
